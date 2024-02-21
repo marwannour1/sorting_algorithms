@@ -23,26 +23,6 @@ void quick_sort(int *array, size_t size)
  * @size: size of the array
  * Return: void
  */
-void quick_sort_recursive(int *array, size_t low, size_t high, size_t size)
-{
-	int pivot;
-
-	if (low < high)
-	{
-		pivot = partition(array, low, high);
-		quick_sort_recursive(array, low, pivot - 1, size);
-		quick_sort_recursive(array, pivot + 1, high, size);
-	}
-}
-
-/**
- * partition - sorts an array of integers in ascending order
- * using the Quick sort algorithm
- * @array: array of integers
- * @low: low index
- * @high: high index
- * Return: void
- */
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
 	int pivot;
