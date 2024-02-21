@@ -39,6 +39,8 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
  * @array: array of integers
  * @low: low index
  * @high: high index
+ * @pos: position
+ * @size: size of the array
  * Return: void
  */
 void partition(int *array, int low, int high, int *pos, size_t size)
