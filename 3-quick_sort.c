@@ -9,8 +9,6 @@
  */
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
-		return;
 	quick_sort_recursive(array, 0, size - 1, size);
 }
 
@@ -25,36 +23,49 @@ void quick_sort(int *array, size_t size)
  */
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
-	int pivot;
-	int i, j, temp;
+	int pos;
 
 	if (low < high)
 	{
-		pivot = high; // Change this line
-		i = low;
-		j = high;
-
-		while (i < j)
-		{
-			while (array[i] <= array[pivot] && i < high)
-				i++;
-			while (array[j] > array[pivot] && j > low) // Change this line
-				j--;
-			if (i < j)
-			{
-				temp = array[i];
-				array[i] = array[j];
-				array[j] = temp;
-				print_array(array, size);
-			}
-		}
-
-		temp = array[pivot];
-		array[pivot] = array[j];
-		array[j] = temp;
-		print_array(array, size);
-
-		quick_sort_recursive(array, low, j - 1, size);
-		quick_sort_recursive(array, j + 1, high, size);
+		partition(array, low, high, &pos, size);
+		quick_sort_recursive(array, low, pos - 1, size);
+		quick_sort_recursive(array, pos + 1, high, size);
 	}
+}
+
+/**
+ * partition - sorts an array of integers in ascending order
+ * using the Quick sort algorithm
+ * @array: array of integers
+ * @low: low index
+ * @high: high index
+ * Return: void
+ */
+void partition(int *array, int low, int high, int *pos, size_t size)
+{
+	int pivot, left, right, temp;
+
+	pivot = array[high];
+	left = low;
+	right = high;
+
+	while (left < right)
+	{
+		while (array[left] < pivot)
+			left++;
+		while (array[right] > pivot)
+			right--;
+		if (left < right)
+		{
+			temp = array[left];
+			array[left] = array[right];
+			array[right] = temp;
+			print_array(array, size);
+		}
+	}
+	temp = array[left];
+	array[left] = array[high];
+	array[high] = temp;
+	print_array(array, size);
+	*pos = left;
 }
