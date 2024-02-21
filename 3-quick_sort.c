@@ -53,7 +53,7 @@ void partition(int *array, int low, int high, int *pos, size_t size)
 	{
 		while (array[left] < pivot)
 			left++;
-		while (array[right] > pivot)
+		while (array[right] >= pivot)
 			right--;
 		if (left < right)
 		{
